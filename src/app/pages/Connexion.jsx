@@ -14,7 +14,7 @@ const Connexion = () => {
 
 
         if (!email || !password) {
-            alert("Veuillez remplir tous les champs");
+            alert("Veuillez remplire tous les champs");
             return;
         }
 
