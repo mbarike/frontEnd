@@ -3,11 +3,12 @@ import QuestionCard from "./QuestionCard";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 
+
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedTag, setSelectedTag] = useState("all");
   const [loading, setLoading] = useState(true);
-  const API_URL = import.meta.env.VITE_API_URL
+  const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
   const filteredQuestions =
     selectedTag === "all"
@@ -25,7 +26,7 @@ const Questions = () => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(
-          "https://backend-node-kiqh.onrender.com/api/question"
+          "http://localhost:3000/api/question"
           
         );
         console.log("QUESTIONS:", res.data.questions);
