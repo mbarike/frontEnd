@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-
-const API_URL = import.meta.env.VITE_API_URL;
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 export default function Detail() {
   const { id } = useParams();
@@ -12,11 +11,14 @@ export default function Detail() {
   const [answers, setAnswers] = useState([]);
   const [contenu, setContenu] = useState("");
 
-  // 📥 récupérer réponses
+  // 📥 récupérer réponses (CORRIGÉ)
   const fetchAnswers = async () => {
     try {
-      const res = await axios.get(`${URL_FRONT}/api/answer/${id}`);
+      const res = await axios.get(
+        `http://localhost:3000/api/answer/${id}`
+      );
 
+      // 🔥 sécurisé
       if (Array.isArray(res.data)) {
         setAnswers(res.data);
       } else if (Array.isArray(res.data.answers)) {
@@ -25,7 +27,7 @@ export default function Detail() {
         setAnswers([]);
       }
     } catch (error) {
-      console.error("Erreur réponses:", error);
+      console.error(error);
       setAnswers([]);
     }
   };
@@ -35,7 +37,7 @@ export default function Detail() {
     e.preventDefault();
 
     try {
-      await axios.post(`${URL_FRONT}/api/answer`, {
+      await axios.post("http://localhost:3000/api/answer", {
         contenu,
         auteur: "Hawa",
         questionId: id,
@@ -44,7 +46,7 @@ export default function Detail() {
       setContenu("");
       fetchAnswers();
     } catch (error) {
-      console.error("Erreur ajout réponse:", error);
+      console.error(error);
     }
   };
 
@@ -53,11 +55,11 @@ export default function Detail() {
     const fetchQuestion = async () => {
       try {
         const res = await axios.get(
-          `${URL_FRONT}/api/question/${id}`
+          `http://localhost:3000/api/question/${id}`
         );
         setQuestion(res.data.question);
       } catch (error) {
-        console.error("Erreur question:", error);
+        console.error(error);
       }
     };
 
@@ -115,8 +117,10 @@ export default function Detail() {
           answers.map((a) => (
             <div key={a._id} className="border p-3 mb-3 rounded">
 
+              {/* contenu */}
               <p className="mb-2">{a.contenu}</p>
 
+              {/* auteur */}
               <span className="text-sm text-gray-500">
                 👤 {a.auteur}
               </span>
@@ -126,7 +130,7 @@ export default function Detail() {
                 <button
                   onClick={async () => {
                     await axios.put(
-                      `${URL_FRONTL}/api/answer/like/${a._id}`
+                      `http://localhost:3000/api/answer/like/${a._id}`
                     );
                     fetchAnswers();
                   }}
@@ -138,7 +142,7 @@ export default function Detail() {
                 <button
                   onClick={async () => {
                     await axios.put(
-                      `${URL_FRONT}/api/answer/dislike/${a._id}`
+                      `http://localhost:3000/api/answer/dislike/${a._id}`
                     );
                     fetchAnswers();
                   }}
@@ -169,7 +173,7 @@ export default function Detail() {
                   if (!text) return;
 
                   await axios.post(
-                    `${URL_FRONT}/api/answer/comment/${a._id}`,
+                    `http://localhost:3000/api/answer/comment/${a._id}`,
                     {
                       contenu: text,
                       auteur: "Hawa",
