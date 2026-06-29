@@ -44,7 +44,7 @@ const Questions = () => {
   const handleDeleteQuestion = async (id) => {
     try {
       await axios.delete(
-        `https://backend-node-kiqh.onrender.com/api/question/${id}`
+        `http://localhost:3000/api/question/${id}`
       );
 
       setQuestions((prev) =>
