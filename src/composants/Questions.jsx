@@ -7,6 +7,7 @@ const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedTag, setSelectedTag] = useState("all");
   const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const filteredQuestions =
     selectedTag === "all"
@@ -24,7 +25,7 @@ const Questions = () => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/question"
+          "https://backend-node-kiqh.onrender.com/api/question"
           
         );
         console.log("QUESTIONS:", res.data.questions);

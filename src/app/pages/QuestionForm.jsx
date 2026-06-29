@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 export default function QuestionForm() {
   const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ export default function QuestionForm() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/api/question", {
+      await axios.post(`${URL_FRONT}/api/question`, {
         titre: title,
         description,
         tags: tags.split(","), // ✅ tableau
