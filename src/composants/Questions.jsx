@@ -7,7 +7,7 @@ const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedTag, setSelectedTag] = useState("all");
   const [loading, setLoading] = useState(true);
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL
 
   const filteredQuestions =
     selectedTag === "all"
@@ -44,7 +44,7 @@ const Questions = () => {
   const handleDeleteQuestion = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3000/api/question/${id}`
+        `https://backend-node-kiqh.onrender.com/api/question/${id}`
       );
 
       setQuestions((prev) =>

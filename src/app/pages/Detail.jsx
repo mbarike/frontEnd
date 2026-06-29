@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 export default function Detail() {
   const { id } = useParams();
