@@ -26,7 +26,7 @@ const Questions = () => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/question"
+          "https://backend-node-kiqh.onrender.com/api/question"
           
         );
         console.log("QUESTIONS:", res.data.questions);
