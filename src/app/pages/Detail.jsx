@@ -55,7 +55,7 @@ export default function Detail() {
     const fetchQuestion = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/question/${id}`
+          `${URL_FRONT}/api/question/${id}`
         );
         setQuestion(res.data.question);
       } catch (error) {
