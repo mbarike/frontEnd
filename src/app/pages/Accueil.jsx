@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Questions from './../../composants/Questions'
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 const Accueil = () => {
   const token = localStorage.getItem('token')

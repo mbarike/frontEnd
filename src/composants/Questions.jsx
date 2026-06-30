@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import QuestionCard from "./QuestionCard";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [selectedTag, setSelectedTag] = useState("all");
   const [loading, setLoading] = useState(true);
-  const URL_FRONT = import.meta.env.VITE_URL_FRONT;
+
 
   const filteredQuestions =
     selectedTag === "all"
@@ -26,7 +27,7 @@ const Questions = () => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(
-          "https://backend-node-kiqh.onrender.com/api/question"
+          `${URL_FRONT}/api/question`
           
         );
         console.log("QUESTIONS:", res.data.questions);
@@ -45,7 +46,7 @@ const Questions = () => {
   const handleDeleteQuestion = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3000/api/question/${id}`
+        `${URL_FRONT}/api/question/${id}`
       );
 
       setQuestions((prev) =>

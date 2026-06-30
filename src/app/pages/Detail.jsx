@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-const URL_FRONT = import.meta.env.VITE_URL_FRONT;
+
 
 export default function Detail() {
   const { id } = useParams();
@@ -37,7 +37,7 @@ export default function Detail() {
     e.preventDefault();
 
     try {
-      await axios.post("${URL_FRONT}/api/answer", {
+      await axios.post(`${URL_FRONT}/api/answer`, {
         contenu,
         auteur: "Hawa",
         questionId: id,
