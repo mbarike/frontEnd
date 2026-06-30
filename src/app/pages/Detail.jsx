@@ -15,7 +15,7 @@ export default function Detail() {
   const fetchAnswers = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/answer/${id}`
+        `${URL_FRONT}/api/answer/${id}`
       );
 
       // 🔥 sécurisé
@@ -37,7 +37,7 @@ export default function Detail() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/api/answer", {
+      await axios.post("${URL_FRONT}/api/answer", {
         contenu,
         auteur: "Hawa",
         questionId: id,
@@ -55,7 +55,7 @@ export default function Detail() {
     const fetchQuestion = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/question/${id}`
+          `${URL_FRONT}/api/question/${id}`
         );
         setQuestion(res.data.question);
       } catch (error) {
