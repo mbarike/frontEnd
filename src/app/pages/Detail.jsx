@@ -130,7 +130,7 @@ export default function Detail() {
                 <button
                   onClick={async () => {
                     await axios.put(
-                      `http://localhost:3000/api/answer/like/${a._id}`
+                      `${URL_FRONT}/api/answer/like/${a._id}`
                     );
                     fetchAnswers();
                   }}
@@ -142,7 +142,7 @@ export default function Detail() {
                 <button
                   onClick={async () => {
                     await axios.put(
-                      `http://localhost:3000/api/answer/dislike/${a._id}`
+                      `${URL_FRONT}/api/answer/dislike/${a._id}`
                     );
                     fetchAnswers();
                   }}
@@ -173,7 +173,7 @@ export default function Detail() {
                   if (!text) return;
 
                   await axios.post(
-                    `http://localhost:3000/api/answer/comment/${a._id}`,
+                    `${URL_FRONT}/api/answer/comment/${a._id}`,
                     {
                       contenu: text,
                       auteur: "Hawa",
