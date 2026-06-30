@@ -4,9 +4,9 @@ const Profil = () => {
   const [editMode, setEditMode] = useState(false);
 
   const [user, setUser] = useState({
-    nom: "hawa",
-    prenom: "thaim",
-    email: "hawathiam@gmail.com",
+    nom: "mbarike",
+    prenom: "thiam",
+    email: "mbarike@gmail.com",
     avatar: "https://i.pravatar.cc/150?img=12",
   });
 
