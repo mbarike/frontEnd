@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profil = () => {
   const navigate = useNavigate();
-   const navigate = useNavigate()
+  
 
   const [editMode, setEditMode] = useState(false);
   
@@ -13,7 +13,6 @@ const Profil = () => {
     email: "hawa@gmail.com",
     role: "membre depuis le 17/09/23",
   });
-  navigate('/');
 
   // ✏️ changement input
   const handleChange = (e) => {
