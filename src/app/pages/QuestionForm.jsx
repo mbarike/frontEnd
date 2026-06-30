@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 export default function QuestionForm() {
@@ -7,6 +8,7 @@ export default function QuestionForm() {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [auteur, setAuteur] = useState("");
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +27,8 @@ export default function QuestionForm() {
       setDescription("");
       setTags("");
       setAuteur("");
+
+     navigate('/');
 
     } catch (error) {
       console.error(error);
