@@ -1,102 +1,137 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 const Profil = () => {
-  const navigate = useNavigate();
-  
-
   const [editMode, setEditMode] = useState(false);
-  
 
   const [user, setUser] = useState({
-    nom: "Hawa Thiam",
-    email: "hawa@gmail.com",
-    role: "membre depuis le 17/09/23",
+    nom: "hawa",
+    prenom: "thaim",
+    email: "hawathiam@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=12",
   });
 
-  // ✏️ changement input
+  // ✅ charger image sauvegardée au démarrage
+  useEffect(() => {
+    const savedAvatar = localStorage.getItem("avatar");
+
+    if (savedAvatar) {
+      setUser((prev) => ({
+        ...prev,
+        avatar: savedAvatar,
+      }));
+    }
+  }, []);
+
   const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  // ✅ CORRIGÉ : image persistante (Base64)
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64Image = reader.result;
+
+        setUser((prev) => ({
+          ...prev,
+          avatar: base64Image,
+        }));
+
+        localStorage.setItem("avatar", base64Image);
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md overflow-hidden">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
 
-        <div className="h-24 bg-gradient-to-r from-indigo-500 to-blue-500"></div>
+      <div className="bg-white w-full max-w-xl rounded-2xl shadow-lg p-6">
 
-        <div className="p-6 text-center -mt-12">
+        {/* Avatar */}
+        <div className="flex flex-col items-center">
+          <img
+            src={user.avatar}
+            alt="profil"
+            className="w-28 h-28 rounded-full object-cover border-4 border-green-500"
+          />
 
-          {/* avatar */}
-          <div className="w-24 h-24 mx-auto rounded-full bg-indigo-600 text-white flex items-center justify-center text-3xl font-bold border-4 border-white shadow-md">
-            {user.nom.charAt(0)}
-          </div>
+          {editMode && (
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="mt-3 text-sm"
+            />
+          )}
 
-          {/* NOM */}
-          {editMode ? (
+          <h1 className="text-2xl font-bold mt-3 text-gray-800">
+            Mon Profil
+          </h1>
+        </div>
+
+        {/* Infos */}
+        <div className="mt-6 space-y-4">
+
+          <div>
+            <label className="text-sm text-gray-500">Nom</label>
             <input
               name="nom"
               value={user.nom}
               onChange={handleChange}
-              className="border p-2 mt-4 w-full text-center rounded"
+              disabled={!editMode}
+              className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100"
             />
-          ) : (
-            <h1 className="text-2xl font-bold mt-4 text-gray-800">
-              {user.nom}
-            </h1>
-          )}
+          </div>
 
-          {/* ROLE */}
-          <span className="inline-block mt-2 px-3 py-1 text-sm bg-indigo-100 text-indigo-600 rounded-full">
-            {user.role}
-          </span>
+          <div>
+            <label className="text-sm text-gray-500">Prénom</label>
+            <input
+              name="prenom"
+              value={user.prenom}
+              onChange={handleChange}
+              disabled={!editMode}
+              className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100"
+            />
+          </div>
 
-          {/* EMAIL */}
-          {editMode ? (
+          <div>
+            <label className="text-sm text-gray-500">Email</label>
             <input
               name="email"
               value={user.email}
               onChange={handleChange}
-              className="border p-2 mt-4 w-full text-center rounded"
+              disabled={!editMode}
+              className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100"
             />
-          ) : (
-            <div className="mt-5 bg-gray-50 rounded-lg p-3 text-sm text-gray-700 flex items-center justify-center gap-2">
-              📧 <span>{user.email}</span>
-            </div>
-          )}
-
-          {/* ACTIONS */}
-          <div className="mt-6 flex gap-3">
-
-            {!editMode ? (
-              <button
-                onClick={() => setEditMode(true)}
-                className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition font-medium"
-              >
-                Modifier
-              </button>
-            ) : (
-              <button
-                onClick={() => setEditMode(false)}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition font-medium"
-              >
-                Enregistrer
-              </button>
-            )}
-
-            <button
-              onClick={() => navigate("/ajouter_question")}
-              className="flex-1 border border-gray-300 hover:bg-gray-100 py-2 rounded-lg transition font-medium"
-            >
-              + Ajouter une question
-            </button>
-
           </div>
-
         </div>
+
+        {/* Buttons */}
+        <div className="flex justify-between mt-6">
+
+          {!editMode ? (
+            <button
+              onClick={() => setEditMode(true)}
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg"
+            >
+              Modifier
+            </button>
+          ) : (
+            <button
+              onClick={() => setEditMode(false)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+            >
+              Sauvegarder
+            </button>
+          )}
+        </div>
+
       </div>
     </div>
   );
