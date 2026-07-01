@@ -15,7 +15,14 @@ const Navbar = () => {
     navigate("/");
   };
 
-  
+  // 🔍 gestion recherche
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!search.trim()) return;
+
+    navigate(`/?search=${search}`);
+    setSearch("");
+  };
 
   return (
     <nav className="w-full h-[10vh] flex items-center justify-between px-8 bg-gray-800 text-white shadow">
