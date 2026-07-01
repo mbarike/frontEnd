@@ -15,14 +15,7 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // 🔍 gestion recherche
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (!search.trim()) return;
-
-    navigate(`/?search=${search}`);
-    setSearch("");
-  };
+ 
 
   return (
     <nav className="w-full h-[10vh] flex items-center justify-between px-8 bg-gray-800 text-white shadow">
@@ -32,22 +25,7 @@ const Navbar = () => {
         MiniStack
       </NavLink>
 
-      {/* 🔍 Barre de recherche */}
-      <form onSubmit={handleSearch} className="flex items-center w-1/3">
-        <input
-          type="text"
-          placeholder="Rechercher une question..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-3 py-1 rounded-l bg-gray-700 text-white outline-none"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 px-4 py-1 rounded-r hover:bg-blue-600"
-        >
-          🔍
-        </button>
-      </form>
+     
 
       {/* Liens */}
       <div className="flex items-center gap-6">
