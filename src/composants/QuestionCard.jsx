@@ -76,12 +76,13 @@ const QuestionCard = ({ question, onDelete }) => {
         {/* Actions + Infos */}
         <div className="flex items-center gap-3">
 
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm transition"
-          >
-            🗑️ Supprimer
-          </button>
+         <button
+  onClick={handleDelete}
+  className="flex items-center gap-1 border border-red-500 text-red-500 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-500 hover:text-white transition duration-300"
+>
+  <span className="text-base">🗑️</span>
+  Supprimer
+</button>
 
           <div className="flex items-center gap-4 text-xs text-gray-500">
       
