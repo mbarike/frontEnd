@@ -21,7 +21,7 @@ const Accueil = () => {
           
           {/* Texte */}
           <div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold mb-4">
+            <h1 className="text-2xl sm:text-4xl font-extrabold mb-4">
   <span className="text-white">Bienvenue sur </span>
   <span className="text-black">Stack Overflow</span>
 </h1>
