@@ -47,9 +47,7 @@ const Accueil = () => {
       {/* ── Section Questions ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10">
         
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
-          📌 Questions récentes
-        </h2>
+       
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <Questions />
